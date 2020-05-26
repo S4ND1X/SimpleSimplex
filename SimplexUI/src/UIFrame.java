@@ -214,7 +214,7 @@ public class UIFrame extends javax.swing.JFrame {
                 .addGap(118, 118, 118))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 300, 720));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(300, 720));
@@ -382,21 +382,20 @@ public class UIFrame extends javax.swing.JFrame {
         tablaRestricciones.getAccessibleContext().setAccessibleName("tablaRest");
         tablaRestricciones.getTableHeader().setFont(new Font("Tahoma",Font.BOLD, 18));
 
-        CalcularBoton.setForeground(new java.awt.Color(0, 0, 0));
         CalcularBoton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sandix/icons/icons8_calculator_32.png"))); // NOI18N
         CalcularBoton.setText("Calcular");
         CalcularBoton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         CalcularBoton.setIconTextGap(6);
         CalcularBoton.setkAllowGradient(false);
-        CalcularBoton.setkBackGroundColor(new java.awt.Color(153, 255, 204));
+        CalcularBoton.setkBackGroundColor(new java.awt.Color(102, 0, 102));
         CalcularBoton.setkBorderRadius(50);
-        CalcularBoton.setkEndColor(new java.awt.Color(153, 255, 204));
+        CalcularBoton.setkEndColor(new java.awt.Color(102, 0, 102));
         CalcularBoton.setkForeGround(new java.awt.Color(0, 0, 0));
-        CalcularBoton.setkHoverColor(new java.awt.Color(117, 255, 186));
+        CalcularBoton.setkHoverColor(new java.awt.Color(127, 0, 127));
         CalcularBoton.setkHoverForeGround(new java.awt.Color(0, 0, 0));
         CalcularBoton.setkHoverStartColor(new java.awt.Color(0, 0, 0));
-        CalcularBoton.setkPressedColor(new java.awt.Color(86, 255, 170));
-        CalcularBoton.setkSelectedColor(new java.awt.Color(255, 102, 102));
+        CalcularBoton.setkPressedColor(new java.awt.Color(153, 0, 153));
+        CalcularBoton.setkSelectedColor(new java.awt.Color(102, 0, 102));
         CalcularBoton.setkStartColor(new java.awt.Color(255, 153, 153));
         CalcularBoton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -499,6 +498,7 @@ public class UIFrame extends javax.swing.JFrame {
         }
         inputValue = inputValue.trim();
         this.valorInputX = Double.parseDouble(inputValue);
+        this.inputX.setText("Valor actual de X = " + inputValue);
     }//GEN-LAST:event_inputXMousePressed
 
     private void inputYMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputYMousePressed
@@ -509,8 +509,9 @@ public class UIFrame extends javax.swing.JFrame {
         }
         inputValue = inputValue.trim();
         this.valorInputY = Double.parseDouble(inputValue);
+        this.inputY.setText("Valor actual de Y = " + inputValue);
     }//GEN-LAST:event_inputYMousePressed
-
+    
     private void inputRestrMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputRestrMousePressed
         // TODO add your handling code here:
         String inputValue = JOptionPane.showInputDialog("Dame una cantidad de restricciones");
@@ -518,6 +519,7 @@ public class UIFrame extends javax.swing.JFrame {
             inputValue = JOptionPane.showInputDialog("Dame una cantidad de restricciones valida");
         }
         inputValue = inputValue.trim();
+        this.noResText.setText(inputValue);
         this.cantRestr = Integer.parseInt(inputValue);
     }//GEN-LAST:event_inputRestrMousePressed
 
