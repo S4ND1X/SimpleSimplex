@@ -13,7 +13,7 @@ import java.lang.String;
  *
  * @author sandi
  */
-public class UIFrame extends javax.swing.JFrame {
+public class SimplexUI extends javax.swing.JFrame {
     
     private int cantRestr;
     private double valorFinalZ, 
@@ -25,7 +25,7 @@ public class UIFrame extends javax.swing.JFrame {
     /**
      * Creates new form UIFrame
      */
-    public UIFrame() {
+    public SimplexUI() {
         initComponents();
     }
     
@@ -359,14 +359,13 @@ public class UIFrame extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Float.class, java.lang.Float.class, java.lang.Float.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        tablaRestricciones.setColumnSelectionAllowed(true);
         tablaRestricciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablaRestricciones.setFocusable(false);
         tablaRestricciones.setInheritsPopupMenu(true);
@@ -479,11 +478,46 @@ public class UIFrame extends javax.swing.JFrame {
 
     private void CalcularBotonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CalcularBotonMousePressed
         // TODO add your handling code here:
-        for(int i = 0; i < 10; i++){
-            for(int j = 0; j < 3; j++){
-                System.out.println(this.tablaRestricciones.getValueAt(i, j)+", ");
+        int rest = this.cantRestr, 
+            incognitas = this.cantRestr + 2;
+        int rowSize = this.cantRestr+3;
+        //Crear objeto
+        Simplex simplex = new Simplex(rest, incognitas);
+        //Crear tabla
+        float[][] arrTabla = new float[rest + 1][rowSize];
+        
+        System.out.println(rest+1 +  " -> " + rowSize);
+        
+        for(int i = 0; i < this.cantRestr-1 ; i++){ // recorrer filas 
+            for(int j= 0; j < rowSize; j++){ // recorrer columnas
+                if(j == i+2){
+                    arrTabla[i][j] = 1;
+                }
+                else if(j >= 2 && j <rowSize-1){
+                    arrTabla[i][j] = 0;
+                }else if(j<2){
+                    arrTabla[i][j] = (float)this.tablaRestricciones.getValueAt(i, j);//Si son los coeficientes de x y
+                }else if(j == rowSize-1){
+                    arrTabla[i][j] = (float)this.tablaRestricciones.getValueAt(i, 2);// Si llego al final de la tabla
+                }
             }
         }
+            
+            System.out.println("Valor fila 1, columna 0  = " + this.tablaRestricciones.getValueAt(1, 0));
+        
+        arrTabla[this.cantRestr][0] = (float)this.valorInputX;
+        arrTabla[this.cantRestr][1] = (float) this.valorInputY;
+        for(int k = 2; k < rowSize; k++){
+            arrTabla[this.cantRestr][k] = 0;
+        }
+        
+        for(float[] row: arrTabla){
+            for(float x: row){
+                System.out.print(x+", ");
+            }
+            System.out.println();
+        }
+        //simplex.llenaTabla(arrTabla);
     }//GEN-LAST:event_CalcularBotonMousePressed
 
     private void CalcularBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularBotonActionPerformed
@@ -556,20 +590,21 @@ public class UIFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SimplexUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SimplexUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SimplexUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SimplexUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UIFrame().setVisible(true);
+                new SimplexUI().setVisible(true);
             }
         });
     }
