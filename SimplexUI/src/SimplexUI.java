@@ -232,7 +232,8 @@ public class SimplexUI extends javax.swing.JFrame {
 
         ValorZPanel.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         ValorZPanel.setForeground(new java.awt.Color(255, 255, 255));
-        ValorZPanel.setText("45.3");
+        ValorZPanel.setText("N/A");
+        ValorZPanel.setToolTipText("");
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -270,7 +271,7 @@ public class SimplexUI extends javax.swing.JFrame {
 
         ValorXPanel.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         ValorXPanel.setForeground(new java.awt.Color(255, 255, 255));
-        ValorXPanel.setText("3.3");
+        ValorXPanel.setText("N/A");
 
         javax.swing.GroupLayout kGradientPanel2Layout = new javax.swing.GroupLayout(kGradientPanel2);
         kGradientPanel2.setLayout(kGradientPanel2Layout);
@@ -307,7 +308,8 @@ public class SimplexUI extends javax.swing.JFrame {
 
         ValorYPanel.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         ValorYPanel.setForeground(new java.awt.Color(255, 255, 255));
-        ValorYPanel.setText("103.3");
+        ValorYPanel.setText("N/A");
+        ValorYPanel.setToolTipText("");
 
         javax.swing.GroupLayout kGradientPanel3Layout = new javax.swing.GroupLayout(kGradientPanel3);
         kGradientPanel3.setLayout(kGradientPanel3Layout);
@@ -337,7 +339,7 @@ public class SimplexUI extends javax.swing.JFrame {
         jLabel7.setText("Restricciones =");
 
         noResText.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        noResText.setText("4");
+        noResText.setText("N/A");
 
         tablaRestricciones.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tablaRestricciones.setForeground(new java.awt.Color(0, 0, 0));
@@ -481,8 +483,6 @@ public class SimplexUI extends javax.swing.JFrame {
         int rest = this.cantRestr, 
             incognitas = this.cantRestr + 2;
         int rowSize = this.cantRestr+3;
-        //Crear objeto
-        Simplex simplex = new Simplex(rest, incognitas);
         //Crear tabla
         float[][] arrTabla = new float[rest + 1][rowSize];
         
@@ -515,7 +515,14 @@ public class SimplexUI extends javax.swing.JFrame {
             }
             System.out.println();
         }
+                //Crear objeto
+        Simplex simplex = new Simplex(rest, incognitas);
         simplex.llenaTabla(arrTabla);
+        simplex.iteracion();
+        this.ValorXPanel.setText(simplex.getX()+"");
+        this.ValorYPanel.setText(simplex.getY()+"");
+        this.ValorZPanel.setText(simplex.getZ()+"");
+        this.repaint();
     }//GEN-LAST:event_CalcularBotonMousePressed
 
     private void CalcularBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularBotonActionPerformed

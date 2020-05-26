@@ -6,6 +6,7 @@ public class Simplex {
     private float 	z,
     				x,
     				y;
+    private resultado res;
 
     public static enum resultado{
         no_optimo,
@@ -45,29 +46,26 @@ public class Simplex {
     public resultado calcula(){
         
         if(revisaOptimo()){
+        	res=resultado.optimo;
             return resultado.optimo; // el resultado es optimo
+            
         }
         
        
         // encuentra la columna pivote
         int columnaPivote = encuentraColumnaPivote();
-        
-        
-       
+
         // encuentra el valor pivote
         float[] valores = divisionColumnaPivote(columnaPivote);
-        if(noHaySolucion) {
+        if(noHaySolucion == true) {
+        	res=resultado.sinSolucion;
         	return resultado.sinSolucion;
         }
             
         int filaPivote = encuentraValorMenor(valores);
-        
-        
-        
+
         // actualiza la tabla
         creaSiguienteTabla(filaPivote, columnaPivote);
-        
-        // since we formed a new table so return NOT_OPTIMAL
         return resultado.no_optimo;
     }
     
@@ -247,59 +245,28 @@ public class Simplex {
     public float getY() {
     	return this.y;
     }
-    
-    
- public static void main(String[] args) {
-        
-        boolean fin = false;
-        
-       
-        
-       /* float[][] tabla =  {
-                { 1,   1,    1,  0,   4},
-                { 1,   3,    0,  1,   6},
-                {-3,  -5,    0,  0,   0}
-        };*/
-        
-       /* float [][]tabla= {
-        		{ 4,2,1,0,0,20},
-                { 8,8,0,1,0,20},
-                {0,2,0,0,1,10},
-                {-10,-20,0,0,0,0}
-        };*/
-        
-        float[][] tabla =  {
-                { 1,   2,    1,  0,   120},
-                { 1,   1,    0,  1,   90},
-                {-50,  -80,    0,  0,   0}
-        };
-       
-        
-        Simplex simplex = new Simplex(2, 4);
-        simplex.llenaTabla(tabla);
+    public resultado getRes() {
+    	return this.res;
+    }
+    public void iteracion() {
+    	boolean fin=false;
+    	 while(!fin){
+             this.calcula();
 
-        
-        System.out.println("Tabla inicial");
-        simplex.print();
-        
-        // si la tabla no es optima se repite el proceso
-        while(!fin){
-            Simplex.resultado err = simplex.calcula();
-
-            if(err == Simplex.resultado.optimo){
-                simplex.print();
-                simplex.setZ();
-                simplex.setX();
-                simplex.setY();
-                System.out.println("Z= "+simplex.getZ());
-                System.out.println("X= "+simplex.getX());
-                System.out.println("Y= "+simplex.getY());
-                fin = true;
-            }
-            else if(err == Simplex.resultado.sinSolucion){
-                System.out.println("sin solucion");
-                fin = true;
-            }
-        }
-    } 
+             if( this.getRes()== Simplex.resultado.optimo){
+                 this.print();
+                 this.setZ();
+                 this.setX();
+                 this.setY();
+                 System.out.println("Z= "+this.getZ());
+                 System.out.println("X= "+this.getX());
+                 System.out.println("Y= "+this.getY());
+                 fin = true;
+             }
+             else if(this.getRes() == Simplex.resultado.sinSolucion){
+                 System.out.println("sin solucion");
+                 fin = true;
+             }
+         }
+    }
 }
