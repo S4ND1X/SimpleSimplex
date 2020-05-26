@@ -16,7 +16,7 @@ import java.lang.String;
 public class SimplexUI extends javax.swing.JFrame {
     
     private int cantRestr;
-    private double valorFinalZ, 
+    private float valorFinalZ, 
                     valorFinalX, 
                     valorFinalY,
                     valorInputX,
@@ -502,8 +502,6 @@ public class SimplexUI extends javax.swing.JFrame {
                 }
             }
         }
-            
-            System.out.println("Valor fila 1, columna 0  = " + this.tablaRestricciones.getValueAt(1, 0));
         
         arrTabla[this.cantRestr][0] = (float)this.valorInputX;
         arrTabla[this.cantRestr][1] = (float) this.valorInputY;
@@ -531,8 +529,8 @@ public class SimplexUI extends javax.swing.JFrame {
             inputValue = JOptionPane.showInputDialog("Dame un valor de X valido");
         }
         inputValue = inputValue.trim();
-        this.valorInputX = Double.parseDouble(inputValue);
-        this.inputX.setText("Valor actual de X = " + inputValue);
+        this.valorInputX = -Float.parseFloat(inputValue);
+        this.inputX.setText("Valor actual de X = " + valorInputX);
     }//GEN-LAST:event_inputXMousePressed
 
     private void inputYMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputYMousePressed
@@ -542,8 +540,8 @@ public class SimplexUI extends javax.swing.JFrame {
             inputValue = JOptionPane.showInputDialog("Dame un valor de Y valido");
         }
         inputValue = inputValue.trim();
-        this.valorInputY = Double.parseDouble(inputValue);
-        this.inputY.setText("Valor actual de Y = " + inputValue);
+        this.valorInputY = -Float.parseFloat(inputValue);
+        this.inputY.setText("Valor actual de Y = " + valorInputY);
     }//GEN-LAST:event_inputYMousePressed
     
     private void inputRestrMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputRestrMousePressed
@@ -561,15 +559,15 @@ public class SimplexUI extends javax.swing.JFrame {
         return this.cantRestr;
     }
     
-    public void setValorFinalZ(double valorFinalZ){
+    public void setValorFinalZ(float valorFinalZ){
         this.valorFinalZ = valorFinalZ;
     }
     
-    public void setValorFinalX(double valorFinalX){
+    public void setValorFinalX(float valorFinalX){
         this.valorFinalX = valorFinalX;
     }
         
-    public void setValorFinalY(double valorFinalY){
+    public void setValorFinalY(float valorFinalY){
         this.valorFinalY = valorFinalY;
     }
     
