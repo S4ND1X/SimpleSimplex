@@ -488,7 +488,7 @@ public class SimplexUI extends javax.swing.JFrame {
         
         System.out.println(rest+1 +  " -> " + rowSize);
         
-        for(int i = 0; i < this.cantRestr-1 ; i++){ // recorrer filas 
+        for(int i = 0; i < this.cantRestr; i++){ // recorrer filas 
             for(int j= 0; j < rowSize; j++){ // recorrer columnas
                 if(j == i+2){
                     arrTabla[i][j] = 1;
@@ -517,7 +517,7 @@ public class SimplexUI extends javax.swing.JFrame {
             }
             System.out.println();
         }
-        //simplex.llenaTabla(arrTabla);
+        simplex.llenaTabla(arrTabla);
     }//GEN-LAST:event_CalcularBotonMousePressed
 
     private void CalcularBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CalcularBotonActionPerformed
