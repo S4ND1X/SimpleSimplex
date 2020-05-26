@@ -519,9 +519,15 @@ public class SimplexUI extends javax.swing.JFrame {
         Simplex simplex = new Simplex(rest, incognitas);
         simplex.llenaTabla(arrTabla);
         simplex.iteracion();
-        this.ValorXPanel.setText(simplex.getX()+"");
-        this.ValorYPanel.setText(simplex.getY()+"");
-        this.ValorZPanel.setText(simplex.getZ()+"");
+        if(simplex.getRes() == Simplex.resultado.sinSolucion){
+            this.ValorXPanel.setText("N/A");
+            this.ValorYPanel.setText("N/A");
+            this.ValorZPanel.setText("N/A");
+        }else{
+            this.ValorXPanel.setText(simplex.getX()+"");
+            this.ValorYPanel.setText(simplex.getY()+"");
+            this.ValorZPanel.setText(simplex.getZ()+"");
+        }
         this.repaint();
     }//GEN-LAST:event_CalcularBotonMousePressed
 
