@@ -1,5 +1,7 @@
 
 import java.awt.Font;
+import javax.swing.JOptionPane;
+import java.lang.String;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,6 +14,13 @@ import java.awt.Font;
  * @author sandi
  */
 public class UIFrame extends javax.swing.JFrame {
+    
+    private int cantRestr;
+    private double valorFinalZ, 
+                    valorFinalX, 
+                    valorFinalY,
+                    valorInputX,
+                    valorInputY;
 
     /**
      * Creates new form UIFrame
@@ -48,7 +57,7 @@ public class UIFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         ValorYPanel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        noResText = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaRestricciones = new javax.swing.JTable();
         CalcularBoton = new keeptoo.KButton();
@@ -74,6 +83,11 @@ public class UIFrame extends javax.swing.JFrame {
         inputX.setkPressedColor(new java.awt.Color(153, 0, 153));
         inputX.setkSelectedColor(new java.awt.Color(102, 0, 102));
         inputX.setkStartColor(new java.awt.Color(102, 204, 255));
+        inputX.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                inputXMousePressed(evt);
+            }
+        });
         inputX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputXActionPerformed(evt);
@@ -119,6 +133,11 @@ public class UIFrame extends javax.swing.JFrame {
         inputRestr.setkPressedColor(new java.awt.Color(153, 0, 153));
         inputRestr.setkSelectedColor(new java.awt.Color(102, 0, 102));
         inputRestr.setkStartColor(new java.awt.Color(102, 204, 255));
+        inputRestr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                inputRestrMousePressed(evt);
+            }
+        });
         inputRestr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputRestrActionPerformed(evt);
@@ -144,6 +163,11 @@ public class UIFrame extends javax.swing.JFrame {
         inputY.setkPressedColor(new java.awt.Color(153, 0, 153));
         inputY.setkSelectedColor(new java.awt.Color(102, 0, 102));
         inputY.setkStartColor(new java.awt.Color(102, 204, 255));
+        inputY.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                inputYMousePressed(evt);
+            }
+        });
         inputY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inputYActionPerformed(evt);
@@ -312,8 +336,8 @@ public class UIFrame extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sandix/icons/icons8_maintenance_32.png"))); // NOI18N
         jLabel7.setText("Restricciones =");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel10.setText("4");
+        noResText.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        noResText.setText("4");
 
         tablaRestricciones.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tablaRestricciones.setForeground(new java.awt.Color(0, 0, 0));
@@ -399,7 +423,7 @@ public class UIFrame extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(noResText, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(CalcularBoton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -417,10 +441,11 @@ public class UIFrame extends javax.swing.JFrame {
                     .addComponent(kGradientPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CalcularBoton, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(CalcularBoton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(noResText, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49))
@@ -466,6 +491,52 @@ public class UIFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CalcularBotonActionPerformed
 
+    private void inputXMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputXMousePressed
+        // TODO add your handling code here:
+        String inputValue = JOptionPane.showInputDialog("Dame un valor de X");
+        while(inputValue == null || inputValue.isEmpty() || inputValue.matches("[A-Za-z]*")){
+            inputValue = JOptionPane.showInputDialog("Dame un valor de X valido");
+        }
+        inputValue = inputValue.trim();
+        this.valorInputX = Double.parseDouble(inputValue);
+    }//GEN-LAST:event_inputXMousePressed
+
+    private void inputYMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputYMousePressed
+        // TODO add your handling code here:
+        String inputValue = JOptionPane.showInputDialog("Dame un valor de Y");
+        while(inputValue == null || inputValue.isEmpty() || inputValue.matches("[A-Za-z]*")){
+            inputValue = JOptionPane.showInputDialog("Dame un valor de Y valido");
+        }
+        inputValue = inputValue.trim();
+        this.valorInputY = Double.parseDouble(inputValue);
+    }//GEN-LAST:event_inputYMousePressed
+
+    private void inputRestrMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inputRestrMousePressed
+        // TODO add your handling code here:
+        String inputValue = JOptionPane.showInputDialog("Dame una cantidad de restricciones");
+        while(inputValue == null || inputValue.isEmpty() || inputValue.matches("[A-Za-z]*")){
+            inputValue = JOptionPane.showInputDialog("Dame una cantidad de restricciones valida");
+        }
+        inputValue = inputValue.trim();
+        this.cantRestr = Integer.parseInt(inputValue);
+    }//GEN-LAST:event_inputRestrMousePressed
+
+    public int getCantidadRestricciones(){
+        return this.cantRestr;
+    }
+    
+    public void setValorFinalZ(double valorFinalZ){
+        this.valorFinalZ = valorFinalZ;
+    }
+    
+    public void setValorFinalX(double valorFinalX){
+        this.valorFinalX = valorFinalX;
+    }
+        
+    public void setValorFinalY(double valorFinalY){
+        this.valorFinalY = valorFinalY;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -511,7 +582,6 @@ public class UIFrame extends javax.swing.JFrame {
     private keeptoo.KButton inputX;
     private keeptoo.KButton inputY;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
@@ -523,6 +593,7 @@ public class UIFrame extends javax.swing.JFrame {
     private keeptoo.KGradientPanel kGradientPanel1;
     private keeptoo.KGradientPanel kGradientPanel2;
     private keeptoo.KGradientPanel kGradientPanel3;
+    private javax.swing.JLabel noResText;
     private javax.swing.JTable tablaRestricciones;
     // End of variables declaration//GEN-END:variables
 }
