@@ -71,7 +71,7 @@ public class SimplexUI extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(300, 720));
 
         inputX.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sandix/icons/icons8_add_32.png"))); // NOI18N
-        inputX.setText("Ingresar Valor X");
+        inputX.setText("Ingresar Coeficiente X");
         inputX.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         inputX.setkAllowGradient(false);
         inputX.setkBackGroundColor(new java.awt.Color(102, 0, 102));
@@ -151,7 +151,7 @@ public class SimplexUI extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sandix/icons/icons8_calculator_64.png"))); // NOI18N
 
         inputY.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sandix/icons/icons8_add_32.png"))); // NOI18N
-        inputY.setText("Ingresar Valor Y");
+        inputY.setText("Ingresar Coeficiente Y");
         inputY.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         inputY.setkAllowGradient(false);
         inputY.setkBackGroundColor(new java.awt.Color(102, 0, 102));
@@ -357,7 +357,7 @@ public class SimplexUI extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Valor X", "Valor Y", "<= Restriccion"
+                "Valor X", "Valor X1", "<= Restriccion"
             }
         ) {
             Class[] types = new Class [] {
